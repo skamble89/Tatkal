@@ -1,0 +1,73 @@
+search page : https://www.irctc.co.in/eticketing/home
+search results page : https://www.irctc.co.in/eticketing/mainpage.jsf
+passenger details page : https://www.irctc.co.in/eticketing/trainbetweenstns.jsf
+payment selection page : https://www.irctc.co.in/eticketing/jpInput.jsf
+payment page : https://ipay.icicibank.com/mpi/Payment.jsp
+
+
+
+Payment Options:
+NETBANKING
+1,State Bank of India
+10,State Bank of India and Associates
+22,Federal Bank
+29,Indian Bank
+28,Union Bank of India
+31,Andhra Bank
+34,Punjab National Bank 
+35,Allahabad Bank
+39,AXIS Bank
+36,HDFC Bank
+37,Bank of Baroda
+42,Karnataka Bank
+43,Oriental Bank of Commerce
+40,Karur Vysya Bank
+46,Kotak Mahindra Bank
+44,ICICI Bank 
+45,IndusInd Bank
+50,Central Bank of India
+48,Bank of India
+54,Syndicate Bank
+53,Bank of Maharashatra
+52,IDBI Bank
+56,Corporation Bank
+60,Yes Bank
+64,Nepal SBI Bank Ltd.
+67,South Indian Bank
+
+CREDIT_CARD
+4,Visa/Master Card(Powered By ICICI BANK)
+17,Visa/Master Card(Powered By CITI BANK)
+21,Visa/Master Card(Powered By HDFC BANK)
+27,American Express
+30,Visa/Master Card(Powered By AXIS BANK)
+58,RuPay Card (Powered by Kotak Bank)
+72,International cards (Powered by ATOM)
+
+DEBIT_CARD
+3,State Bank of India
+5,Indian Overseas Bank
+9,Punjab National Bank
+15,Indian Bank
+16,Union Bank of India 
+19,Bank of India
+25,Andhra Bank
+26,Canara Bank
+32,CITI Bank
+41,ICICI Bank
+57,HDFC Bank
+69,Central Bank of India
+66,AXIS Bank
+
+CASH_CARD
+23,ITZ Cash Card
+33,I Cash Card
+55,OXI Cash Card
+68,Mobikwik Wallet
+70,mRUPEE Wallet
+71,Paytm Wallet
+
+IRCTC_PREPAID
+59,IRCTC Union Bank prepaid (RuPay)
+
+E_WALLET
