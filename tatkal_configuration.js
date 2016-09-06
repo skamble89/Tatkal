@@ -143,6 +143,6 @@
 	// setItem('payment_option', '41')
 
 	function setItem(key, value){
-		localStorage.setItem(key, JSON.stringify(typeof value === 'object' ? value : {value: value}));
+		localStorage.setItem(key, JSON.stringify(value));
 	}
 })();

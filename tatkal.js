@@ -83,8 +83,7 @@
 		return d.promise();
 	}
 
-	function getItem(key){
-		var result = JSON.parse(localStorage.getItem(key));
-		return result.value || result;
+	function getItem(key){		
+		return JSON.parse(localStorage.getItem(key));
 	}
 })()
