@@ -88,8 +88,7 @@
 
 					'<div>'+
 						'<label for="option_type">Payment Option</label>'+
-						'<select id="option_type">'+
-							'<option></option>'+
+						'<select id="option_type">'+							
 							'<option value="NETBANKING">Netbanking</option>'+
 							'<option value="CREDIT_CARD">Credit Card</option>'+
 							'<option value="DEBIT_CARD">Debit Card</option>'+
