@@ -72,10 +72,16 @@
 			name: 'IRCTC_PREPAID',
 			options: [{key:59,value:'IRCTC Union Bank prepaid (RuPay)'}]
 		}];
-	var div = createContainer();
-	renderConfig(div);
-	bindEvents(div);
-	populateConfig(div);
+
+	var div = document.getElementById('tatkal-config');
+	if(!div){
+		div = createContainer();
+		renderConfig(div);
+		bindEvents(div);
+		populateConfig(div);
+	}else{
+		document.body.removeChild(div);
+	}
 
 	function renderConfig(div){	
 		var html = '<div><label style="display:inline-block;width:150px;">From Station</label><input data-key="from" type="text" class="tatkal-param" style="display:inline-block;width:150px;"/></div>'+
@@ -153,9 +159,19 @@
 		var $div = $(div);
 		$('.tatkal-param', $div).each(function(){
 			var $this = $(this),
-				key = $this.data('key');
+				key = $this.data('key'),
+				value = getItem(key);
 
-			$this.val(getItem(key));
+			if(key==='option_type'){
+				var html = '<option value="">--Select--</option>';
+				var options = paymentOptions.filter(function(e){return e.name===value;})[0];
+				if(options){
+					html+=options.options.map(function(e){return '<option value="'+e.key+'">'+e.value+'</option>';});
+					$('select[data-key="payment_option"]', $div).html(html);
+				}
+			}
+
+			$this.val(value);
 		})
 
 		var passengers = getItem('passengers') || [];
@@ -179,6 +195,7 @@
 
 	function createContainer(){
 		var div = document.createElement('div');
+		div.id = 'tatkal-config';
 		div.style.position = 'absolute';
 		div.style.top = '0';
 		div.style.right = '0';		
