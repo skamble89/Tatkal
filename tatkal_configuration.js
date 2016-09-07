@@ -75,73 +75,127 @@
 	var div = createContainer();
 	renderConfig(div);
 	bindEvents(div);
+	populateConfig(div);
 
 	function renderConfig(div){	
-		var html = '<div><label for="from">From Station</label><input id="from" type="text"/></div>'+
-					'<div><label for="to">To Station</label><input id="to" type="text"/></div>'+
-					'<div><label for="date">Date</label><input id="date" type="text" placeholder="dd-mm-yyyy"/></div>'+
+		var html = '<div><label style="display:inline-block;width:150px;">From Station</label><input data-key="from" type="text" class="tatkal-param" style="display:inline-block;width:150px;"/></div>'+
+					'<div><label style="display:inline-block;width:150px;">To Station</label><input data-key="to" type="text" class="tatkal-param" style="display:inline-block;width:150px;"/></div>'+
+					'<div><label style="display:inline-block;width:150px;">Date</label><input data-key="date" type="text" placeholder="dd-mm-yyyy" class="tatkal-param" style="display:inline-block;width:150px;"/></div>'+
 					'<hr/>'+
 
-					'<div><label for="train_no">Train No</label><input id="train_no" type="text"/></div>'+
-					'<div><label for="class">Class</label><input id="class" type="text"/></div>'+
+					'<div><label style="display:inline-block;width:150px;">Train No</label><input data-key="train_no" type="text" class="tatkal-param" style="display:inline-block;width:150px;"/></div>'+
+					'<div><label style="display:inline-block;width:150px;">Class</label><select data-key="class" class="tatkal-param" style="display:inline-block;width:150px;"><option value="">--Select--</option><option>2A</option><option>3A</option><option>SL</option></select></div>'+
 					'<hr/>'+
+
+					'<div><label style="display:inline-block;width:150px;">Mobile</label><input data-key="mobile" class="tatkal-param" style="display:inline-block;width:150px;"/></div>'+
+					'<button id="addPax">Add Passenger</button>'+
+					'<table id="paxList">'+
+						'<tr>'+
+							'<th>Name</th><th>Age</th><th>Gender</th>'+
+						'</tr>'+
+					'</table>'+					
+					'<hr/>' +
 
 					'<div>'+
-						'<label for="option_type">Payment Option</label>'+
-						'<select id="option_type">'+							
-							'<option value="NETBANKING">Netbanking</option>'+
-							'<option value="CREDIT_CARD">Credit Card</option>'+
-							'<option value="DEBIT_CARD">Debit Card</option>'+
-							'<option value="CASH_CARD">Cash card</option>'+
-							'<option value="IRCTC_PREPAID">IRCTC Prepaid</option>'+
+						'<label style="display:inline-block;width:150px;">Payment Type</label>'+
+						'<select data-key="option_type" class="tatkal-param" style="display:inline-block;width:150px;">'+
+							'<option value="">--Select--</option>'+							
+							(function(){
+								return paymentOptions.map(function(e){return '<option>' + e.name + '</option>';});
+							})()+
 						'</select>'+
 					'</div>'+
-					'<div>'+
-						'<label for="payment_option"></label>'+
-						'<select id="payment_option"></select>'+
+					'<div>'+	
+						'<label style="display:inline-block;width:150px;">Payment Option</label>'+					
+						'<select data-key="payment_option" class="tatkal-param" style="display:inline-block;width:150px;">'+
+							'<option value="">--Select--</option>'+
+						'</select>'+
 					'</div>';
 
 		div.innerHTML = html;
 	}
 
 	function bindEvents(div){
+		var $div = $(div);
+		$('.tatkal-param', $div).on('change', function(){
+			var $this = $(this),
+				key = $this.data('key'),
+				value = $this.val();
 
+			setItem(key, value);			
+			if(key==='option_type'){
+				var html = '<option value="">--Select--</option>';
+				var options = paymentOptions.filter(function(e){return e.name===value;})[0];
+				if(options){
+					html+=options.options.map(function(e){return '<option value="'+e.key+'">'+e.value+'</option>';});
+					$('select[data-key="payment_option"]', $div).html(html);
+				}
+			}
+		});
+
+		$('#addPax', $div).on('click', addPaxRow);
+
+		$('#paxList').on('change', 'input,select', function(){
+			var $this = $(this),
+				key = $this.data('key'),
+				value = $this.val(),
+				passengers = getItem('passengers') || [],
+				index = ($this.parents('tr').index() || 1)-1,
+				pax = passengers[index] || {};
+
+			pax[key] = value;
+			passengers[index] = pax;
+			setItem('passengers', passengers);
+		});
+	}
+
+	function populateConfig(div){
+		var $div = $(div);
+		$('.tatkal-param', $div).each(function(){
+			var $this = $(this),
+				key = $this.data('key');
+
+			$this.val(getItem(key));
+		})
+
+		var passengers = getItem('passengers') || [];
+		if(passengers.length>0){
+			for(var i=0;i<passengers.length;i++){
+				var index = i+1;
+				var pax = passengers[i];
+				addPaxRow();
+				$('#paxList tr:eq('+index+') input[data-key="name"]').val(pax.name);
+				$('#paxList tr:eq('+index+') input[data-key="age"]').val(pax.age);
+				$('#paxList tr:eq('+index+') select[data-key="gender"]').val(pax.gender);
+			}
+		}else{			
+			addPaxRow();
+		}
+	}
+
+	function addPaxRow(){
+		$('#paxList').append('<tr><td><input type="text" data-key="name"/></td><td><input type="text" data-key="age"/></td><td><select data-key="gender"><option value="">--Gender--</option><option value="M">Male</option><option value="F">Female</option></select></td></tr>');		
 	}
 
 	function createContainer(){
 		var div = document.createElement('div');
 		div.style.position = 'absolute';
 		div.style.top = '0';
-		div.style.right = '0';
-		div.style.height = '500px'
-		div.style.width = '300px'
+		div.style.right = '0';		
+		div.style.width = '500px'
 		div.style.backgroundColor = '#aaa';
 		div.style.zIndex = '10000';
+		div.style.padding = '10px';
 		document.body.appendChild(div);
 
 		return div;
 	}
 
-	// setItem('from', 'PUNE JN - PUNE');
-	// setItem('to', 'NAGPUR - NGP');
-	// setItem('date', '09-09-2016');
-
-	// setItem('train_no', '12129');
-	// setItem('class', 'SL');
-
-	// setItem('pax_details', {
-	// 	passengers: [{
-	// 		name: 'Saurabh Kamble',
-	// 		age: '27',
-	// 		gender: 'M'
-	// 	}],
-	// 	mobile: '9975132263'
-	// });
-
-	// setItem('option_type', 'DEBIT_CARD');
-	// setItem('payment_option', '41')
-
 	function setItem(key, value){
 		localStorage.setItem(key, JSON.stringify(value));
+	}
+
+	function getItem(key){		
+		return JSON.parse(localStorage.getItem(key));
 	}
 })();

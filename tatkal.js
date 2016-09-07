@@ -32,15 +32,15 @@
 
 
 			pax_details: function(){
-				var pax_details = getItem('pax_details');
-				for(var i=0;i<pax_details.passengers.length;i++){
-					var pax = pax_details.passengers[i];
+				var passengers = getItem('passengers');
+				for(var i=0;i<passengers.length;i++){
+					var pax = passengers[i];
 					$('.psgn-name:eq(' + i + ')').val(pax.name);
 					$('.psgn-age:eq(' + i + ')').val(pax.age);
 					$('.psgn-gender:eq(' + i + ')').val(pax.gender);
 					if(pax.seat_preference) $('.psgn-psgn-berth-choice:eq(' + i + ')').val(pax.seat_preference);
 				}
-				$('.mobile-number').val(pax_details.mobile);
+				$('.mobile-number').val(getItem('mobile'));
 			},
 
 
