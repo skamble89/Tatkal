@@ -63,7 +63,7 @@
 			if(!document.getElementById('avlAndFareForm:trainbtwnstns')) return 'search';
 			return 'book_now';
 		}
-		if($('.psgn-info-table').length){
+		if($('.psgn-info-table').length && !$('.payment-option').length){
 			return 'pax_details';
 		}
 		return 'payment_selection';
