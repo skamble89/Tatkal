@@ -41,6 +41,7 @@
 					if(pax.seat_preference) $('.psgn-psgn-berth-choice:eq(' + i + ')').val(pax.seat_preference);
 				}
 				$('.mobile-number').val(getItem('mobile'));
+				$('#nlpAnswer').length && $('#nlpAnswer').focus();
 			},
 
 
