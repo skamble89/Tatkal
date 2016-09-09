@@ -55,18 +55,18 @@
 			}
 		};
 
-		actions[action]();
-		//set next action
-		switch(action){
-			case 'search': sessionStorage.setItem('next_action','book_now'); break;
-			case 'book_now': sessionStorage.setItem('next_action','pax_details'); break;
-			case 'pax_details': sessionStorage.setItem('next_action','payment_selection'); break;
-			case 'payment_selection': sessionStorage.removeItem('next_action'); break;
-		}
+		actions[action]();		
 	}
 
 	function getAction(){
-		return sessionStorage.getItem('next_action') || 'search';
+		if(document.getElementById('jpform:fromStation')){
+			if(!document.getElementById('avlAndFareForm:trainbtwnstns')) return 'search';
+			return 'book_now';
+		}
+		if($('.psgn-info-table').length){
+			return 'pax_details';
+		}
+		return 'payment_selection';
 	}
 
 	function waitFor(fn){
