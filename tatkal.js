@@ -42,6 +42,7 @@
 				}
 				$('.mobile-number').val(getItem('mobile'));
 				$('#nlpAnswer').length && $('#nlpAnswer').focus();
+				$('#j_captcha').length && $('#j_captcha').focus();
 			},
 
 
