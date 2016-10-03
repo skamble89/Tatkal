@@ -1,2 +1,2 @@
-# Tatkal
+# Want to book a Tatkal ticket? Look no futher...
 Utilities to book tatkal train tickets
