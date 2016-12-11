@@ -20,7 +20,7 @@
 					booking_class = getItem('class');
 
 				//Click tatkal radio button
-				$('input[type="radio"][value="CK"]').click();
+				$('input[type="radio"][value="TQ"]').click();
 				//Click on appropriate train booking class
 				eval($('tr:contains(' + train_no + ') a:contains(' + booking_class + ')').attr('href').replace('javascript:',''));
 				waitFor(function(){
@@ -39,6 +39,7 @@
 					$('.psgn-age:eq(' + i + ')').val(pax.age);
 					$('.psgn-gender:eq(' + i + ')').val(pax.gender);
 					if(pax.seat_preference) $('.psgn-psgn-berth-choice:eq(' + i + ')').val(pax.seat_preference);
+					$('.psgn-foodChoice:eq(' + i + ')').val('N');
 				}
 				$('.mobile-number').val(getItem('mobile'));
 				$('#nlpAnswer').length && $('#nlpAnswer').focus();
