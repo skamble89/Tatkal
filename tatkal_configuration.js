@@ -90,7 +90,7 @@
 					'<hr/>'+
 
 					'<div><label style="display:inline-block;width:150px;">Train No</label><input data-key="train_no" type="text" class="tatkal-param" style="display:inline-block;width:150px;"/></div>'+
-					'<div><label style="display:inline-block;width:150px;">Class</label><select data-key="class" class="tatkal-param" style="display:inline-block;width:150px;"><option value="">--Select--</option><option>2A</option><option>3A</option><option>SL</option></select></div>'+
+					'<div><label style="display:inline-block;width:150px;">Class</label><select data-key="class" class="tatkal-param" style="display:inline-block;width:150px;"><option value="">--Select--</option><option>2A</option><option>3A</option><option>SL</option><option>CC</option><option>2S</option></select></div>'+
 					'<hr/>'+
 
 					'<div><label style="display:inline-block;width:150px;">Mobile</label><input data-key="mobile" class="tatkal-param" style="display:inline-block;width:150px;"/></div>'+
